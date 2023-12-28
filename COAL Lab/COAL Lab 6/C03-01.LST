@@ -1,0 +1,41 @@
+     1                                  [org 0x0100]
+     2                                  
+     3 00000000 E90800                  jmp start       
+     4                                  
+     5 00000003 0700050006000300        data: dw   7, 5, 6, 3
+     6                                  
+     7                                  
+     8                                  start: 
+     9 0000000B B90400                      mov  cx, 4                          ; make 4 passes, has to be outside the loop! 
+    10                                  
+    11                                      outerloop: 
+    12 0000000E BB0000                          mov  bx, 0    
+    13                                          
+    14                                          innerloop: 
+    15 00000011 8B87[0300]                          mov  ax, [data + bx]
+    16 00000015 3B87[0500]                          cmp  ax, [data + bx + 2]    ; why did we move the value to AX? 
+    17                                  
+    18 00000019 760C                                jbe  noswap                 ; if we don't have to swap, we just jump over the swap thing 
+    19                                                                          ; think of this as the "if"
+    20                                  
+    21                                                  ; the swap potion 
+    22 0000001B 8B97[0500]                              mov  dx, [data + bx + 2]
+    23 0000001F 8987[0500]                              mov  [data + bx + 2], ax    ; again with the AX? 
+    24 00000023 8997[0300]                              mov  [data + bx], dx
+    25                                  
+    26                                              noswap:
+    27 00000027 81C30200                            add  bx, 2
+    28 0000002B 81FB0600                            cmp  bx, 6
+    29 0000002F 75E0                                jne  innerloop
+    30                                  
+    31                                          ; check outer loop termination 
+    32 00000031 81E90100                        sub cx, 1 
+    33 00000035 75D7                            jnz outerloop 
+    34                                  
+    35                                  
+    36                                      ; exit system call 
+    37 00000037 B8004C                      mov  ax, 0x4c00
+    38 0000003A CD21                        int  0x21
+    39                                  
+    40                                  
+    41                                  

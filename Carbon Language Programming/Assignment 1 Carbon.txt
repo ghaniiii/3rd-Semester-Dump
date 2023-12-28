@@ -1,0 +1,110 @@
+package sumofintegersInAnArray api;
+
+fn Main() ->i32 {
+
+    var array : [i32 ; 11] = (0,1,2,3,4,5,6,7,8,9,10);
+
+    var sum : i32 = 0;
+
+    for(i : i32 in array){
+        sum = sum + i;
+    }
+
+    Print("The Sum Of The Elements in the Array is {0}", sum);
+
+    return 0;
+}
+
+----------------------------------------------------------------
+
+package oddAndEveninArray api;
+
+fn Main() ->i32 {
+
+    var array : [i32 ; 11] = (0,1,2,3,4,5,6,7,8,9,10);
+
+    var sum : i32 = 0;
+    var even: i32 = 0;
+    var odd: i32 = 0;
+
+    for(i : i32 in array){
+        if(i%2 == 0){
+            Print("{0} is Even",i);
+            even = even + 1;
+        }
+        else{
+            Print("{0} is Odd" ,i);
+            odd = odd + 1;
+        }
+    }
+
+    Print("\n\n\n");
+
+    Print("There Are {0} Even Numbers In The Given Array", even);
+    Print("There Are {0} Odd Numbers In The Given Array\n\n", odd);
+
+    return 0;
+}
+
+
+-------------------------------------------------------------------
+
+package sumOfAllEvenAndOddNumbersInAnArray api;
+
+fn Main() ->i32 {
+
+    var array : [i32 ; 11] = (0,1,2,3,4,5,6,7,8,9,10);
+
+    var evensum: i32 = 0;
+    var oddsum: i32 = 0;
+
+    for(i : i32 in array){
+        if(i%2 == 0){
+            Print("{0} is Even",i);
+            evensum = evensum + i;
+        }
+        else{
+            Print("{0} is Odd" ,i);
+            oddsum = oddsum + i;
+        }
+    }
+
+    Print("\n\n\n");
+
+    Print("The Sum Of All Even Numbers In The Given Array Is {0}", evensum);
+    Print("The Sum Of All Odd Numbers In The Given Array Is {0}\n\n", oddsum);
+
+    return 0;
+}
+
+
+-----------------------------------------------------------------------------
+
+package sample api;
+
+fn Main() -> i32 {
+  var line : [String ; 5] = ("c","i","v","i","c");
+
+  var i : i32 = 0;
+  var j : i32 = 4;
+
+  var counter : i32 = 0;
+
+  while(i<j){
+    if(line[i] == line[j]){
+        ++counter;
+    }
+    ++i;
+    --j;
+  } 
+
+  if(counter == 5/2){
+    Print("The Given String Is A Palindrom");
+  }
+  else{
+    Print("The Given String Is Not A Palindrom");
+  }
+
+  return 0;
+}
+

@@ -1,0 +1,99 @@
+Question 1 
+
+---------------------------------
+
+package addingDelFunction api;
+
+var array : [i32 ; 5] = (55, 45, 56, 67, 89);
+
+var size : i32 = 5;
+
+fn Deletefun(var toDelete : i32) ->i32 {
+    var i : i32 = 0;
+
+    while(i <= 4){
+
+        if(array[i] == toDelete){
+            array[i] = -1;
+        }
+
+        i = i + 1; 
+    }
+
+    return 1;
+}
+
+
+fn Main() ->i32 {
+
+    var i : i32 = 0;
+
+    Print("---- Original Array ----");
+
+    while(i<= 4){
+        Print("          {0}",array[i]);
+
+        i = i + 1;
+    }
+
+    Print("---- After Deleting 45 ----");
+
+    Deletefun(45);
+
+    i = 0;
+
+    while(i<= 4){
+        Print("          {0}",array[i]);
+
+        i = i + 1;
+    }
+
+    Print("---- After Deleting 89 ----");
+
+    Deletefun(89);
+    
+    i = 0;
+
+    while(i<= 4){
+        Print("          {0}",array[i]);
+
+        i = i + 1;
+    }
+
+    return 0;
+}
+
+-----------------------------------
+
+
+Question 2
+
+
+-----------------------------------
+
+package xpowern api;
+
+
+fn FindxPowern(var x : i32 , var n : i32) -> i32 {
+    if(n == 1){
+        return x;
+    }
+    else{
+        return x * FindxPowern(x , n-1);
+    }
+}
+
+fn Main() ->i32{
+
+    Print("----------------------------------");
+
+    Print("The Answer To 3 Power 3 Is : {0} ", FindxPowern(3,3));
+
+    Print("The Answer To 2 Power 4 Is : {0} ", FindxPowern(2,4));
+
+    Print("The Answer To 2 Power 5 Is : {0} ", FindxPowern(2,5));
+
+    Print("----------------------------------");
+
+    return 0;
+}

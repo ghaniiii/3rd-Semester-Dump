@@ -1,0 +1,45 @@
+     1                                  [org 0x0100]
+     2                                  
+     3 00000000 E90900                  	jmp start
+     4                                  
+     5 00000003 0600070008000900        	data: dw 6 , 7 , 8 , 9
+     6 0000000B 00                      	swap: db 0
+     7                                  
+     8                                  
+     9                                  	start:
+    10                                  
+    11                                  		outerloop: 
+    12                                  	  
+    13 0000000C B80000                  			mov ax , 0
+    14 0000000F BB0000                  			mov bx , 0
+    15 00000012 C606[0B00]00            			mov byte [swap] , 0
+    16                                  			
+    17                                  			innerloop:
+    18                                  			
+    19 00000017 8B87[0300]              				mov ax,[data + bx]
+    20                                  				
+    21 0000001B 3B87[0500]              				cmp ax , [data + bx + 2]
+    22                                  				
+    23 0000001F 7711                    				jnbe noswap
+    24                                  				
+    25 00000021 8B97[0500]              					mov dx , [data + bx + 2]
+    26 00000025 8997[0300]              					mov [data + bx] , dx
+    27 00000029 8987[0500]              					mov [data + bx + 2] , ax
+    28 0000002D C606[0B00]01            					mov byte [swap] , 1
+    29                                  					
+    30                                  			noswap:
+    31                                  				
+    32 00000032 81C30200                			add bx , 2
+    33 00000036 81FB0600                			cmp bx , 6
+    34                                  					
+    35 0000003A 75DB                    			jne innerloop
+    36                                  				
+    37 0000003C 803E[0B00]01            		cmp byte [swap] , 1
+    38 00000041 74C9                    		je outerloop
+    39                                  		
+    40                                  		
+    41 00000043 B8004C                  	mov ax , 0x4c00
+    42 00000046 CD21                    	int 0x21
+    43                                  
+    44                                  		
+    45                                  		

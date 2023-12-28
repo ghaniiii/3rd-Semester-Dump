@@ -1,0 +1,49 @@
+     1                                  [org 0x0100]
+     2                                  
+     3 00000000 E90900                  	jmp start
+     4                                  
+     5 00000003 0600070008000900        	data: dw 6 , 7 , 8 , 9
+     6 0000000B 00                      	swap: db 0
+     7                                  
+     8                                  
+     9                                  	start:
+    10                                  
+    11                                  		outerloop: 
+    12                                  	  
+    13 0000000C B80000                  			mov ax , 0
+    14 0000000F BB0000                  			mov bx , 0
+    15 00000012 C606[0B00]00            			mov byte [swap] , 0
+    16                                  			
+    17                                  			innerloop:
+    18                                  			
+    19 00000017 8B87[0300]              				mov ax,[data + bx]
+    20                                  				
+    21 0000001B 3B87[0500]              				cmp ax , [data + bx + 2]
+    22                                  				
+    23 0000001F 7417                    				je noswap
+    24                                  				
+    25 00000021 3B87[0500]              				cmp ax , [data + bx + 2]
+    26                                  				
+    27 00000025 7711                    				ja noswap
+    28                                  				
+    29 00000027 8B97[0500]              					mov dx , [data + bx + 2]
+    30 0000002B 8997[0300]              					mov [data + bx] , dx
+    31 0000002F 8987[0500]              					mov [data + bx + 2] , ax
+    32 00000033 C606[0B00]01            					mov byte [swap] , 1
+    33                                  					
+    34                                  			noswap:
+    35                                  				
+    36 00000038 81C30200                			add bx , 2
+    37 0000003C 81FB0600                			cmp bx , 6
+    38                                  					
+    39 00000040 75D5                    			jne innerloop
+    40                                  				
+    41 00000042 803E[0B00]01            		cmp byte [swap] , 1
+    42 00000047 74C3                    		je outerloop
+    43                                  		
+    44                                  		
+    45 00000049 B8004C                  	mov ax , 0x4c00
+    46 0000004C CD21                    	int 0x21
+    47                                  
+    48                                  		
+    49                                  		
